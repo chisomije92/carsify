@@ -2,14 +2,14 @@ POST http://localhost:3000/auth/signup
 content-type: application/json
  
   {
-    "email": "jerry1@gmail.com",
+    "email": "chisom@gmail.com",
     "password": "12345"
   }
 
 
 ### find users
 
-GET http://localhost:3000/auth?email=jerry1@gmail.com
+GET http://localhost:3000/auth?email=chisom@gmail.com
 
 ### get user by ID
 
@@ -18,7 +18,7 @@ GET http://localhost:3000/auth/633d5a8e2fca515ff5bb2876
 
 ### delete user
 
-DELETE http://localhost:3000/auth/633d69972ac10e5e43507b46
+DELETE http://localhost:3000/auth/633d6b35cf32cb209c0e30a4
 
 
 ### Update User
