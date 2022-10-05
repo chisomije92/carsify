@@ -20,7 +20,7 @@ export class UsersService {
   }
 
   async update(id: string, attrs: Partial<User>) {
-    const user = await this.userRepo.findOne({ _id: id });
+    const user = await this.userRepo.findOne({ _id: new Types.ObjectId(id) });
     if (!user) {
       throw new NotFoundException('User not found');
     }

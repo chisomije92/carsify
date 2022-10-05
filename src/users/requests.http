@@ -20,3 +20,14 @@ GET http://localhost:3000/auth/633d5a8e2fca515ff5bb2876
 
 DELETE http://localhost:3000/auth/633d69972ac10e5e43507b46
 
+
+### Update User
+
+PATCH http://localhost:3000/auth/633d5a8e2fca515ff5bb2876
+content-type: application/json
+ 
+  {
+    "email": "jerry1@gmail.com",
+    "password": "1234"
+  }
+
