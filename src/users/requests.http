@@ -2,10 +2,16 @@ POST http://localhost:3000/auth/signup
 content-type: application/json
  
   {
-    "email": "jerry1@gmail.com",
+    "email": "jerry2@gmail.com",
     "password": "12345"
   }
 
 ### get user by ID
 
 GET http://localhost:3000/auth/633d5a8e2fca515ff5bb2876
+
+
+### delete user
+
+DELETE http://localhost:3000/auth/633d69972ac10e5e43507b46
+

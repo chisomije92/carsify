@@ -1,6 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Body, Controller, Get, Post, Param } from '@nestjs/common';
-import { Types } from 'mongoose';
+import { Body, Controller, Get, Post, Param, Delete } from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UsersService } from './users.service';
 
@@ -15,5 +14,10 @@ export class UsersController {
   @Get('/:id')
   findUser(@Param('id') id: string) {
     return this.userService.findOne(id);
+  }
+
+  @Delete('/:id')
+  removeUser(@Param('id') id: string) {
+    return this.userService.remove(id);
   }
 }

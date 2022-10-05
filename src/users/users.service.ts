@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
 import { User, UserDocument } from './user.schema';
@@ -22,13 +22,17 @@ export class UsersService {
   async update(id: string, attrs: Partial<User>) {
     const user = await this.userRepo.findOne({ _id: id });
     if (!user) {
-      throw new Error('User not found');
+      throw new NotFoundException('User not found');
     }
     Object.assign(user, attrs);
     return await user.save();
   }
 
   async remove(id: string) {
-    return await this.userRepo.deleteOne({ _id: id });
+    const user = await this.userRepo.findByIdAndDelete(id);
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+    return user;
   }
 }
