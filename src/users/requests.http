@@ -42,3 +42,10 @@ content-type: application/json
     "password": "1234"
   }
 
+### cookies - color
+
+Get http://localhost:3000/auth/colors/red
+
+###
+
+Get http://localhost:3000/auth/colors
