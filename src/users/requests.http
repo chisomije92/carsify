@@ -2,9 +2,14 @@ POST http://localhost:3000/auth/signup
 content-type: application/json
  
   {
-    "email": "jerry2@gmail.com",
+    "email": "jerry1@gmail.com",
     "password": "12345"
   }
+
+
+### find users
+
+GET http://localhost:3000/auth?email=jerry1@gmail.com
 
 ### get user by ID
 
