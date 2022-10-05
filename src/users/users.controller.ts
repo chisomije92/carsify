@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Param } from '@nestjs/common';
+import { Types } from 'mongoose';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UsersService } from './users.service';
 
@@ -9,5 +10,10 @@ export class UsersController {
   @Post('/signup')
   createUser(@Body() body: CreateUserDto) {
     this.userService.create(body.email, body.password);
+  }
+
+  @Get('/:id')
+  findUser(@Param('id') id: string) {
+    return this.userService.findOne(id);
   }
 }

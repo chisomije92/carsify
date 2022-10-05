@@ -5,3 +5,7 @@ content-type: application/json
     "email": "jerry1@gmail.com",
     "password": "12345"
   }
+
+### get user by ID
+
+GET http://localhost:3000/auth/633d5a8e2fca515ff5bb2876

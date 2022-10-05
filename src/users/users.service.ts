@@ -1,8 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { find } from 'rxjs';
+import { Model, Types } from 'mongoose';
 import { User, UserDocument } from './user.schema';
 
 @Injectable()
@@ -13,7 +12,7 @@ export class UsersService {
   }
 
   async findOne(id: string) {
-    return await this.userRepo.findOne({ _id: id });
+    return await this.userRepo.findOne({ _id: new Types.ObjectId(id) });
   }
 
   async find(email: string) {
