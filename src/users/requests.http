@@ -2,7 +2,7 @@ POST http://localhost:3000/auth/signup
 content-type: application/json
  
   {
-    "email": "chisom@gmail.com",
+    "email": "test@gmail.com",
     "password": "12345"
   }
 
@@ -12,10 +12,14 @@ POST http://localhost:3000/auth/signin
 content-type: application/json
  
   {
-    "email": "chisom@gmail.com",
+    "email": "test@gmail.com",
     "password": "12345"
   }
  
+### who am I
+
+GET http://localhost:3000/auth/whoami
+
 
 
 ### find users
@@ -42,10 +46,4 @@ content-type: application/json
     "password": "1234"
   }
 
-### cookies - color
 
-Get http://localhost:3000/auth/colors/red
-
-###
-
-Get http://localhost:3000/auth/colors
