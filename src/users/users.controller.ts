@@ -11,6 +11,7 @@ import {
   Session,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
+import { CurrentUser } from './decorators/current-user.decorator';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UpdateUserDto } from './dtos/update-user.dto';
 import { UsersService } from './users.service';
@@ -42,8 +43,11 @@ export class UsersController {
   }
 
   @Get('/whoami')
-  whoAmI(@Session() session: any) {
-    return this.userService.findOne(session.userId);
+  //whoAmI(@Session() session: any) {
+  //  return this.userService.findOne(session.userId);
+  //}
+  whoAmI(@CurrentUser() user: string) {
+    return user;
   }
 
   @Get('/:id')
