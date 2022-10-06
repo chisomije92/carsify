@@ -13,7 +13,7 @@ export class UsersService {
 
   async findOne(id: string) {
     if (!id) return null;
-    return await this.userRepo.findOne({ _id: new Types.ObjectId(id) });
+    return await this.userRepo.findById({ _id: new Types.ObjectId(id) });
   }
 
   async find(email: string) {

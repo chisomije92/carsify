@@ -29,7 +29,7 @@ GET http://localhost:3000/auth?email=chisom@gmail.com
 
 ### get user by ID
 
-GET http://localhost:3000/auth/633d5a8e2fca515ff5bb2876
+GET http://localhost:3000/auth/633e94ee8290d64be7448304
 
 
 ### delete user
