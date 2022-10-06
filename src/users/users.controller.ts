@@ -18,12 +18,10 @@ import { UpdateUserDto } from './dtos/update-user.dto';
 import { UserDto } from './dtos/user-dto';
 import { Serialize } from '../interceptors/serialize.interceptor';
 import { UsersService } from './users.service';
-import { CurrentUserInterceptor } from './interceptors/current-user.interceptor';
 import { User } from './user.schema';
 
 @Serialize(UserDto)
 @Controller('auth')
-@UseInterceptors(CurrentUserInterceptor)
 export class UsersController {
   constructor(
     private userService: UsersService,
