@@ -12,6 +12,7 @@ export class UsersService {
   }
 
   async findOne(id: string) {
+    if (!id) return null;
     return await this.userRepo.findOne({ _id: new Types.ObjectId(id) });
   }
 
