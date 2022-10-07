@@ -16,7 +16,6 @@ describe('Authentication System', () => {
     }).compile();
 
     app = moduleFixture.createNestApplication();
-    setUpApp(app);
     await app.init();
   });
 
