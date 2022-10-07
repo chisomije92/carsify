@@ -3,9 +3,11 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from '../src/app.module';
+import { setUpApp } from '../src/setup-app';
 
 describe('Authentication System', () => {
-  jest.useFakeTimers();
+  //jest.useFakeTimers();
+  jest.setTimeout(7000);
   let app: INestApplication;
 
   beforeEach(async () => {
@@ -14,11 +16,12 @@ describe('Authentication System', () => {
     }).compile();
 
     app = moduleFixture.createNestApplication();
+    setUpApp(app);
     await app.init();
   });
 
   it('handles a signup request', () => {
-    const email = 'great@test.com';
+    const email = 'great1@test.com';
     return request(app.getHttpServer())
       .post('/auth/signup')
       .send({ email, password: '00000' })
