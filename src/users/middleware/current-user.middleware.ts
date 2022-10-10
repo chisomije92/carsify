@@ -5,10 +5,13 @@ import { Request, Response, NextFunction } from 'express';
 
 import { UsersService } from '../users.service';
 
+interface RequestUser extends Request {
+  currentUser: any;
+}
 @Injectable()
 export class CurrentUserMiddleWare implements NestMiddleware {
   constructor(private usersService: UsersService) {}
-  async use(request: Request, res: Response, Next: NextFunction) {
+  async use(request: RequestUser, res: Response, Next: NextFunction) {
     const { userId } = request.session || {};
 
     if (userId) {
