@@ -1,7 +1,8 @@
 /* eslint-disable prettier/prettier */
 
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, Types } from 'mongoose';
+import mongoose, { Document, Types } from 'mongoose';
+import { User } from '../users/user.schema';
 
 export type ReportDocument = Report & Document;
 
@@ -32,6 +33,12 @@ export class Report {
 
   @Prop()
   mileage: number;
+
+  @Prop({
+    type: mongoose.Schema.Types.ObjectId,
+    ref: () => User,
+  })
+  user: User;
 }
 
 export const ReportSchema = SchemaFactory.createForClass(Report);
