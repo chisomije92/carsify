@@ -3,6 +3,6 @@
 import { User } from './users/user.entity';
 declare module 'Express' {
   interface Request {
-    currentUser?: Record<string, any>;
+    currentUser?: User;
   }
 }
