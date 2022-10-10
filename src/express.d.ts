@@ -3,6 +3,6 @@ import { User } from './users/user.schema';
 
 declare module 'Express' {
   interface Request {
-    currentUser?: User;
+    currentUser?: any;
   }
 }
