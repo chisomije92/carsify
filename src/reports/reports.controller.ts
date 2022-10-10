@@ -12,6 +12,7 @@ import { CreateReportDto } from './dtos/create-report.dto';
 import { ReportsService } from './reports.service';
 import { User } from '../users/user.schema';
 import { ApprovedReportDto } from './dtos/approved-report.dto';
+import { AdminGuard } from '../guards/admin.guard';
 
 @Controller('reports')
 export class ReportsController {
@@ -24,6 +25,7 @@ export class ReportsController {
   }
 
   @Patch('/:id')
+  @UseGuards(AdminGuard)
   approveReport(@Param('id') id: string, @Body() body: ApprovedReportDto) {
     return this.reportService.changeApproval(id, body.approved);
   }

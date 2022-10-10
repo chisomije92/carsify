@@ -15,6 +15,9 @@ export class User {
   @Prop()
   password: string;
 
+  @Prop({ default: true })
+  admin: boolean;
+
   @Prop({
     type: [
       {
