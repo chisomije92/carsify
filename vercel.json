@@ -1,5 +1,9 @@
 {
   "version": 2,
+  "env": {
+    "MONGODB_URI": "@MONGODB_URI",
+    "COOKIE_KEY": "@COOKIE_KEY"
+  },
   "builds": [
     {
       "src": "src/main.ts",
