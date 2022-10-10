@@ -10,7 +10,7 @@ export type ReportDocument = Report & Document;
 export class Report {
   _id: Types.ObjectId;
 
-  @Prop()
+  @Prop({ default: false })
   approved: boolean;
 
   @Prop()

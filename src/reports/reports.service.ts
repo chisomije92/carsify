@@ -5,6 +5,7 @@ import { Model } from 'mongoose';
 import { User } from '../users/user.schema';
 import { CreateReportDto } from './dtos/create-report.dto';
 import { Report, ReportDocument } from './report.schema';
+import { NotFoundException } from '@nestjs/common';
 
 @Injectable()
 export class ReportsService {
@@ -13,9 +14,15 @@ export class ReportsService {
   ) {}
 
   async create(reportDto: CreateReportDto, user: User) {
-    //const report = await this.reportModel.create(reportDto);
     const report = new this.reportModel(reportDto);
     report.user = user;
+    return report.save();
+  }
+
+  async changeApproval(id: string, approved: boolean) {
+    const report = await this.reportModel.findById(id);
+    if (!report) throw new NotFoundException('Report not found!');
+    report.approved = approved;
     return report.save();
   }
 }

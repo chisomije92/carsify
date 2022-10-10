@@ -1,9 +1,17 @@
-import { Controller, Post, Body, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  Patch,
+  Param,
+  UseGuards,
+} from '@nestjs/common';
 import { CurrentUser } from '../users/decorators/current-user.decorator';
 import { AuthGuard } from '../guards/auth.guard';
 import { CreateReportDto } from './dtos/create-report.dto';
 import { ReportsService } from './reports.service';
 import { User } from '../users/user.schema';
+import { ApprovedReportDto } from './dtos/approved-report.dto';
 
 @Controller('reports')
 export class ReportsController {
@@ -13,5 +21,10 @@ export class ReportsController {
   @UseGuards(AuthGuard)
   createReport(@Body() body: CreateReportDto, @CurrentUser() user: User) {
     return this.reportService.create(body, user);
+  }
+
+  @Patch('/:id')
+  approveReport(@Param('id') id: string, @Body() body: ApprovedReportDto) {
+    return this.reportService.changeApproval(id, body.approved);
   }
 }
