@@ -16,7 +16,8 @@ content-type: application/json
 
 
 ### Change approval status
-PATCH  http://localhost:3000/reports/63444b0be33a7eb928cba614
+
+PATCH  http://localhost:3000/reports/6344769999197eb78506be66
 content-type: application/json
 
 {

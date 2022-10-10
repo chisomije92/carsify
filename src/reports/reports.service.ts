@@ -16,13 +16,13 @@ export class ReportsService {
   async create(reportDto: CreateReportDto, user: User) {
     const report = new this.reportModel(reportDto);
     report.user = user;
-    return report.save();
+    return await report.save();
   }
 
   async changeApproval(id: string, approved: boolean) {
     const report = await this.reportModel.findById(id);
     if (!report) throw new NotFoundException('Report not found!');
     report.approved = approved;
-    return report.save();
+    return await report.save();
   }
 }

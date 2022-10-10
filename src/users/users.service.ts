@@ -1,5 +1,9 @@
 /* eslint-disable prettier/prettier */
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
 import { User, UserDocument } from './user.schema';
@@ -25,6 +29,7 @@ export class UsersService {
     if (!user) {
       throw new NotFoundException('User not found');
     }
+    if (attrs.password) throw new BadRequestException('Invalid request!');
     Object.assign(user, attrs);
     return await user.save();
   }

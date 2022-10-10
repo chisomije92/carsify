@@ -20,13 +20,16 @@ export class ReportsController {
 
   @Post()
   @UseGuards(AuthGuard)
-  createReport(@Body() body: CreateReportDto, @CurrentUser() user: User) {
-    return this.reportService.create(body, user);
+  async createReport(@Body() body: CreateReportDto, @CurrentUser() user: User) {
+    return await this.reportService.create(body, user);
   }
 
   @Patch('/:id')
   @UseGuards(AdminGuard)
-  approveReport(@Param('id') id: string, @Body() body: ApprovedReportDto) {
-    return this.reportService.changeApproval(id, body.approved);
+  async approveReport(
+    @Param('id') id: string,
+    @Body() { approved }: ApprovedReportDto,
+  ) {
+    return await this.reportService.changeApproval(id, approved);
   }
 }

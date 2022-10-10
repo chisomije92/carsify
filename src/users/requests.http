@@ -2,7 +2,7 @@ POST http://localhost:3000/auth/signup
 content-type: application/json
  
   {
-    "email": "test3@gmail.com",
+    "email": "jerry@gmail.com",
     "password": "12345"
   }
 
@@ -12,7 +12,7 @@ POST http://localhost:3000/auth/signin
 content-type: application/json
  
   {
-    "email": "test1@gmail.com",
+    "email": "jerry@gmail.com",
     "password": "12345"
   }
  
@@ -39,12 +39,11 @@ DELETE http://localhost:3000/auth/633d6b35cf32cb209c0e30a4
 
 ### Update User
 
-PATCH http://localhost:3000/auth/633d5a8e2fca515ff5bb2876
+PATCH http://localhost:3000/auth/634468f8441e42b37e02e88a
 content-type: application/json
  
   {
-    "email": "jerry1@gmail.com",
-    "password": "1234"
+    "email": "jerry@gmail.com"
   }
 
 
