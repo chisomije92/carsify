@@ -1,6 +1,8 @@
 import {
   Controller,
   Post,
+  Get,
+  Query,
   Body,
   Patch,
   Param,
@@ -13,6 +15,7 @@ import { ReportsService } from './reports.service';
 import { User } from '../users/user.schema';
 import { ApprovedReportDto } from './dtos/approved-report.dto';
 import { AdminGuard } from '../guards/admin.guard';
+import { GetEstimateDto } from './dtos/get-estimate.dto';
 
 @Controller('reports')
 export class ReportsController {
@@ -31,5 +34,10 @@ export class ReportsController {
     @Body() { approved }: ApprovedReportDto,
   ) {
     return await this.reportService.changeApproval(id, approved);
+  }
+
+  @Get()
+  async getEstimate(@Query() query: GetEstimateDto) {
+    return await this.reportService.createEstimate(query);
   }
 }

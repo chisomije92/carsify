@@ -6,6 +6,7 @@ import { User } from '../users/user.schema';
 import { CreateReportDto } from './dtos/create-report.dto';
 import { Report, ReportDocument } from './report.schema';
 import { NotFoundException } from '@nestjs/common';
+import { GetEstimateDto } from './dtos/get-estimate.dto';
 
 @Injectable()
 export class ReportsService {
@@ -24,5 +25,20 @@ export class ReportsService {
     if (!report) throw new NotFoundException('Report not found!');
     report.approved = approved;
     return await report.save();
+  }
+
+  async createEstimate({ make, lng, lat }: GetEstimateDto) {
+    return await this.reportModel
+      .find({ make: make })
+      .where('make')
+      .equals(make)
+      .where('lng', lng)
+      .gte(-45)
+      .lte(45)
+      .where('lat', lat)
+      .gte(-45)
+      .lte(45)
+      .sort('-mileage')
+      .limit(3);
   }
 }
