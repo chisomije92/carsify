@@ -89,7 +89,7 @@ A Rest API that enables registered users to view and create reports for cars at 
 | :-------- | :------- | :------------------------- | :------------------------- |
 | `email` | `string` |  Email address of user       | Yes              |
 | `oldPassword` | `string` |  Current password of user       | Yes
-| `password` | `string` |  New password of user       | Yes
+| `newPassword` | `string` |  New password of user       | Yes
 
 
 ## API Reference - Reports
