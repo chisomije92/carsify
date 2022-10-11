@@ -55,7 +55,7 @@ export class UsersController {
     session.userId = null;
   }
 
-  @Get('/whoami')
+  @Get('/currentuser')
   @UseGuards(AuthGuard)
   whoAmI(@CurrentUser() user: User) {
     return user;

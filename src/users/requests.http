@@ -1,4 +1,4 @@
-POST https://carsify-gamma.vercel.app/auth/signup
+POST https://carsify-api.vercel.app/auth/signup
 content-type: application/json
  
   {
@@ -8,7 +8,7 @@ content-type: application/json
 
 ### signin
 
-POST https://carsify-gamma.vercel.app/auth/signin
+POST https://carsify-api.vercel.app/auth/signin
 content-type: application/json
  
   {
@@ -18,28 +18,28 @@ content-type: application/json
  
 ### who am I
 
-GET https://carsify-gamma.vercel.app/auth/whoami
+GET https://carsify-api.vercel.app/auth/currentuser
 
 ### signout
-Post https://carsify-gamma.vercel.app/auth/signout
+Post https://carsify-api.vercel.app/auth/signout
 
 ### find users
 
-GET https://carsify-gamma.vercel.app/auth?email=jerry@gmail.com
+GET https://carsify-api.vercel.app/auth?email=jerry@gmail.com
 
 ### get user by ID
 
-GET https://carsify-gamma.vercel.app/auth/633e94ee8290d64be7448304
+GET https://carsify-api.vercel.app/auth/633e94ee8290d64be7448304
 
 
 ### delete user
 
-DELETE https://carsify-gamma.vercel.app/auth/633d6b35cf32cb209c0e30a4
+DELETE https://carsify-api.vercel.app/auth/633d6b35cf32cb209c0e30a4
 
 
 ### Update User
 
-PATCH https://carsify-gamma.vercel.app/auth/63447b246adeb4277faa08da
+PATCH https://carsify-api.vercel.app/auth/63447b246adeb4277faa08da
 content-type: application/json
  
   {
@@ -48,7 +48,7 @@ content-type: application/json
 
 ### change user password
 
-POST https://carsify-gamma.vercel.app/auth/changepassword
+POST https://carsify-api.vercel.app/auth/changepassword
 content-type: application/json
 
 {

@@ -1,6 +1,6 @@
 ### create reports
 
-POST https://carsify-gamma.vercel.app/reports
+POST https://carsify-api.vercel.app/reports
 content-type: application/json
  
   {
@@ -17,7 +17,7 @@ content-type: application/json
 
 ### Change approval status
 
-PATCH  https://carsify-gamma.vercel.app/reports/6344880946385dba44c7c5cb
+PATCH  https://carsify-api.vercel.app/reports/6344880946385dba44c7c5cb
 content-type: application/json
 
 {
@@ -25,4 +25,4 @@ content-type: application/json
 }
 
 ### get estimate for existing vehicle
-GET https://carsify-gamma.vercel.app/reports?make=toyota&model=mustang&lng=45&lat=45&mileage=2000&year=1982
+GET https://carsify-api.vercel.app/reports?make=toyota&model=mustang&lng=45&lat=45&mileage=2000&year=1982
