@@ -25,21 +25,21 @@ Post https://carsify-gamma.vercel.app/auth/signout
 
 ### find users
 
-GET http://localhost:3000/auth?email=chisom@gmail.com
+GET https://carsify-gamma.vercel.app/auth?email=jerry@gmail.com
 
 ### get user by ID
 
-GET http://localhost:3000/auth/633e94ee8290d64be7448304
+GET https://carsify-gamma.vercel.app/auth/633e94ee8290d64be7448304
 
 
 ### delete user
 
-DELETE http://localhost:3000/auth/633d6b35cf32cb209c0e30a4
+DELETE https://carsify-gamma.vercel.app/auth/633d6b35cf32cb209c0e30a4
 
 
 ### Update User
 
-PATCH http://localhost:3000/auth/63447b246adeb4277faa08da
+PATCH https://carsify-gamma.vercel.app/auth/63447b246adeb4277faa08da
 content-type: application/json
  
   {
@@ -48,7 +48,7 @@ content-type: application/json
 
 ### change user password
 
-POST http://localhost:3000/auth/changepassword
+POST https://carsify-gamma.vercel.app/auth/changepassword
 content-type: application/json
 
 {

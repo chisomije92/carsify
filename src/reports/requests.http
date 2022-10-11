@@ -1,13 +1,13 @@
 ### create reports
 
-POST http://localhost:3000/reports
+POST https://carsify-gamma.vercel.app/reports
 content-type: application/json
  
   {
    "make": "toyota",
    "model": "corolla",
-   "year": 1982,
-   "mileage": 100000,
+   "year": 1999,
+   "mileage": 200000,
    "lng": 45,
    "lat": 45,
    "price": 20000
@@ -17,7 +17,7 @@ content-type: application/json
 
 ### Change approval status
 
-PATCH  http://localhost:3000/reports/6344769999197eb78506be66
+PATCH  https://carsify-gamma.vercel.app/reports/6344880946385dba44c7c5cb
 content-type: application/json
 
 {
