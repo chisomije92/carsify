@@ -123,11 +123,6 @@ A Rest API that enables registered users to view and create reports for cars at 
 | `approved` | `string` |  approval status      | Yes              |
 
 
-#### Get current user
-
-```http
-  GET https://carsify-api.vercel.app/auth/currentuser
-```
 
 #### Get estimate for existing vehicle
 
