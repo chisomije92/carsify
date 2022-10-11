@@ -20,6 +20,7 @@ import { Serialize } from '../interceptors/serialize.interceptor';
 import { UsersService } from './users.service';
 import { User } from './user.schema';
 import { AuthGuard } from '../guards/auth.guard';
+import { updateUserPasswordDto } from './dtos/update-user-password.dtos';
 
 @Serialize(UserDto)
 @Controller('auth')
@@ -78,5 +79,18 @@ export class UsersController {
   @Patch('/:id')
   updateUser(@Param('id') id: string, @Body() body: UpdateUserDto) {
     return this.userService.update(id, body);
+  }
+
+  @Post('/changepassword')
+  async changeUserPassword(
+    @Body() { email, oldPassword, newPassword }: updateUserPasswordDto,
+  ) {
+    const user = await this.authService.changePassword(
+      email,
+      oldPassword,
+      newPassword,
+    );
+
+    return user;
   }
 }

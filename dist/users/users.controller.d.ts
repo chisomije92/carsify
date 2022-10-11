@@ -3,6 +3,7 @@ import { CreateUserDto } from './dtos/create-user.dto';
 import { UpdateUserDto } from './dtos/update-user.dto';
 import { UsersService } from './users.service';
 import { User } from './user.schema';
+import { updateUserPasswordDto } from './dtos/update-user-password.dtos';
 export declare class UsersController {
     private userService;
     private authService;
@@ -25,6 +26,9 @@ export declare class UsersController {
         _id: import("mongoose").Types.ObjectId;
     }>;
     updateUser(id: string, body: UpdateUserDto): Promise<User & import("mongoose").Document<any, any, any> & {
+        _id: import("mongoose").Types.ObjectId;
+    }>;
+    changeUserPassword({ email, oldPassword, newPassword }: updateUserPasswordDto): Promise<User & import("mongoose").Document<any, any, any> & {
         _id: import("mongoose").Types.ObjectId;
     }>;
 }

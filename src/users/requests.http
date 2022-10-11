@@ -1,27 +1,27 @@
-POST http://localhost:3000/auth/signup
+POST https://carsify-gamma.vercel.app/auth/signup
 content-type: application/json
  
   {
     "email": "jerry@gmail.com",
-    "password": "12345"
+    "password": "1234"
   }
 
 ### signin
 
-POST http://localhost:3000/auth/signin
+POST https://carsify-gamma.vercel.app/auth/signin
 content-type: application/json
  
   {
     "email": "jerry@gmail.com",
-    "password": "12345"
+    "password": "1234"
   }
  
 ### who am I
 
-GET http://localhost:3000/auth/whoami
+GET https://carsify-gamma.vercel.app/auth/whoami
 
 ### signout
-Post http://localhost:3000/auth/signout
+Post https://carsify-gamma.vercel.app/auth/signout
 
 ### find users
 
@@ -39,11 +39,26 @@ DELETE http://localhost:3000/auth/633d6b35cf32cb209c0e30a4
 
 ### Update User
 
-PATCH http://localhost:3000/auth/634468f8441e42b37e02e88a
+PATCH http://localhost:3000/auth/63447b246adeb4277faa08da
 content-type: application/json
  
   {
     "email": "jerry@gmail.com"
   }
+
+### change user password
+
+POST http://localhost:3000/auth/changepassword
+content-type: application/json
+
+{
+  "email": "jerry@gmail.com",
+   "oldPassword": "12345",
+  "newPassword": "1234"
+  }
+
+
+
+
 
 

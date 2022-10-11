@@ -36,4 +36,26 @@ export class AuthService {
       throw new BadRequestException('Bad Request. Credentials are incorrect!');
     return user;
   }
+
+  async changePassword(
+    email: string,
+    oldPassword: string,
+    newPassword: string,
+  ) {
+    const [user] = await this.userService.find(email);
+    if (!user) {
+      throw new NotFoundException('User Not Found!');
+    }
+    const [salt, storedHash] = user.password.split('.');
+    const hash = (await scrypt(oldPassword, salt, 32)) as Buffer;
+    if (hash.toString('hex') !== storedHash)
+      throw new BadRequestException('Bad Request. Credentials are incorrect!');
+    const newHash = (await scrypt(newPassword, salt, 32)) as Buffer;
+    if (newHash.toString('hex') === hash.toString('hex'))
+      throw new BadRequestException('Old password is same as new password!');
+    const result = salt + '.' + newHash.toString('hex');
+    Object.assign(user, { password: result });
+    user.password = result;
+    return await user.save();
+  }
 }

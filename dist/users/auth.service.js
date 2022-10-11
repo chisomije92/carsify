@@ -41,6 +41,23 @@ let AuthService = class AuthService {
             throw new common_1.BadRequestException('Bad Request. Credentials are incorrect!');
         return user;
     }
+    async changePassword(email, oldPassword, newPassword) {
+        const [user] = await this.userService.find(email);
+        if (!user) {
+            throw new common_1.NotFoundException('User Not Found!');
+        }
+        const [salt, storedHash] = user.password.split('.');
+        const hash = (await scrypt(oldPassword, salt, 32));
+        if (hash.toString('hex') !== storedHash)
+            throw new common_1.BadRequestException('Bad Request. Credentials are incorrect!');
+        const newHash = (await scrypt(newPassword, salt, 32));
+        if (newHash.toString('hex') === hash.toString('hex'))
+            throw new common_1.BadRequestException('Old password is same as new password!');
+        const result = salt + '.' + newHash.toString('hex');
+        Object.assign(user, { password: result });
+        user.password = result;
+        return await user.save();
+    }
 };
 AuthService = __decorate([
     (0, common_1.Injectable)(),

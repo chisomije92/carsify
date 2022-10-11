@@ -23,6 +23,7 @@ const serialize_interceptor_1 = require("../interceptors/serialize.interceptor")
 const users_service_1 = require("./users.service");
 const user_schema_1 = require("./user.schema");
 const auth_guard_1 = require("../guards/auth.guard");
+const update_user_password_dtos_1 = require("./dtos/update-user-password.dtos");
 let UsersController = class UsersController {
     constructor(userService, authService) {
         this.userService = userService;
@@ -55,6 +56,10 @@ let UsersController = class UsersController {
     }
     updateUser(id, body) {
         return this.userService.update(id, body);
+    }
+    async changeUserPassword({ email, oldPassword, newPassword }) {
+        const user = await this.authService.changePassword(email, oldPassword, newPassword);
+        return user;
     }
 };
 __decorate([
@@ -117,6 +122,13 @@ __decorate([
     __metadata("design:paramtypes", [String, update_user_dto_1.UpdateUserDto]),
     __metadata("design:returntype", void 0)
 ], UsersController.prototype, "updateUser", null);
+__decorate([
+    (0, common_1.Post)('/changepassword'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [update_user_password_dtos_1.updateUserPasswordDto]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "changeUserPassword", null);
 UsersController = __decorate([
     (0, serialize_interceptor_1.Serialize)(user_dto_1.UserDto),
     (0, common_1.Controller)('auth'),
