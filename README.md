@@ -1,73 +1,143 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+# Carsify
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
+[![Nest JS](https://img.shields.io/badge/Nestjs-Rest%20API-red)](https://nestjs.com/)
+A Rest API that enables registered users to view and create reports for cars at their convenience.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+## Features
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- User creation
+- Authentication - Secured passwords (Rainbow attack proof)
+- User deletion
+- API routes
+- Report creation
+- Report approval by administrative user
 
-## Installation
 
-```bash
-$ npm install
+
+## API Reference - Users
+
+#### User sign up
+
+```http
+  POST https://carsify-api.vercel.app/auth/signup
 ```
 
-## Running the app
+| Parameter | Type     | Description                | Required                |
+| :-------- | :------- | :------------------------- | :------------------------- |
+| `email` | `string` |  Email address of user       | Yes              |
+| `password` | `string` |  Password of user       | Yes
 
-```bash
-# development
-$ npm run start
 
-# watch mode
-$ npm run start:dev
+#### User sign in
 
-# production mode
-$ npm run start:prod
+```http
+  POST https://carsify-api.vercel.app/auth/signin
 ```
 
-## Test
+| Parameter | Type     | Description                | Required                |
+| :-------- | :------- | :------------------------- | :------------------------- |
+| `email` | `string` |  Email address of user       | Yes              |
+| `password` | `string` |  Password of user       | Yes
 
-```bash
-# unit tests
-$ npm run test
+#### Get current user
 
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+```http
+  GET https://carsify-api.vercel.app/auth/currentuser
 ```
 
-## Support
+#### User Sign out
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```http
+  POST https://carsify-api.vercel.app/auth/signout
+```
 
-## Stay in touch
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+#### Find all users
 
-## License
+```http
+  GET https://carsify-api.vercel.app/auth/?$email=${email}
+```
 
-Nest is [MIT licensed](LICENSE).
+#### Find user by ID
+
+```http
+  GET https://carsify-api.vercel.app/auth/:id
+```
+
+#### Delete user
+
+```http
+  GET https://carsify-api.vercel.app/auth/:id
+```
+
+#### Update user email
+
+```http
+  PATCH https://carsify-api.vercel.app/auth/:id
+```
+
+#### Change user password
+
+```http
+  POST https://carsify-api.vercel.app/auth/:id
+```
+| Parameter | Type     | Description                | Required                |
+| :-------- | :------- | :------------------------- | :------------------------- |
+| `email` | `string` |  Email address of user       | Yes              |
+| `oldPassword` | `string` |  Current password of user       | Yes
+| `password` | `string` |  New password of user       | Yes
+
+
+## API Reference - Reports
+
+#### Create reports
+
+```http
+  POST https://carsify-api.vercel.app/reports
+```
+
+| Parameter | Type     | Description                | Required                |
+| :-------- | :------- | :------------------------- | :------------------------- |
+| `make` | `string` |  Make of car       | Yes              |
+| `model` | `string` |  Model of car       | Yes
+| `year` | `string` |  Year of car       | Yes              |
+| `mileage` | `string` |  Mileage of car       | Yes
+| `lng` | `string` |  Longitude       | Yes              |
+| `lat` | `string` |  Latitude       | Yes
+| `price` | `string` |  Price of car       | Yes              |
+
+
+
+#### Change approval status by admin user
+
+```http
+  POST https://carsify-api.vercel.app/reports/:id
+```
+
+| Parameter | Type     | Description                | Required                |
+| :-------- | :------- | :------------------------- | :------------------------- |
+| `approved` | `string` |  approval status      | Yes              |
+
+
+#### Get current user
+
+```http
+  GET https://carsify-api.vercel.app/auth/currentuser
+```
+
+#### Get estimate for existing vehicle
+
+```http
+  GET https://carsify-api.vercel.app/auth/?make=${make}&model=${model}&lng=${lng}&lat=${lat}&mileage=${mileage}&year=${year}
+```
+## Authors
+
+- [@devManiac92](https://www.twitter.com/devManiac92)
+
+
+## Feedback
+
+If you have any feedback, please reach out to me at chisomije92@gmail.com
+

@@ -48,7 +48,7 @@ content-type: application/json
 
 ### change user password
 
-POST https://carsify-api.vercel.app/auth/changepassword
+POST http://localhost:3000/auth/changepassword
 content-type: application/json
 
 {
