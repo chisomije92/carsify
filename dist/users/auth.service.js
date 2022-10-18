@@ -42,6 +42,8 @@ let AuthService = class AuthService {
             token: this.jwtService.sign({
                 email: user.email,
                 id: user.id,
+            }, {
+                expiresIn: '60m',
             }),
             user: user,
         };
