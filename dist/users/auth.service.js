@@ -12,11 +12,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthService = void 0;
 const common_1 = require("@nestjs/common");
 const users_service_1 = require("./users.service");
-const crypto_1 = require("crypto");
-const util_1 = require("util");
 const bcrypt = require("bcrypt");
 const jwt_1 = require("@nestjs/jwt");
-const scrypt = (0, util_1.promisify)(crypto_1.scrypt);
 let AuthService = class AuthService {
     constructor(userService, jwtService) {
         this.userService = userService;
@@ -27,8 +24,8 @@ let AuthService = class AuthService {
         if (users.length) {
             throw new common_1.BadRequestException('email in use');
         }
-        const saltOrRounds = 10;
-        const hashedPassword = await bcrypt.hash(password, saltOrRounds);
+        const salt = 10;
+        const hashedPassword = await bcrypt.hash(password, salt);
         const user = await this.userService.create(email, hashedPassword);
         return user;
     }
@@ -41,26 +38,32 @@ let AuthService = class AuthService {
         if (!result) {
             throw new common_1.BadRequestException('Bad Request. Credentials are incorrect!');
         }
-        return this.jwtService.sign({
-            email: user.email,
-            id: user.id,
-        });
+        const auth = {
+            token: this.jwtService.sign({
+                email: user.email,
+                id: user.id,
+            }),
+            user: user,
+        };
+        return auth;
     }
     async changePassword(email, oldPassword, newPassword) {
         const [user] = await this.userService.find(email);
         if (!user) {
             throw new common_1.NotFoundException('User Not Found!');
         }
-        const [salt, storedHash] = user.password.split('.');
-        const hash = (await scrypt(oldPassword, salt, 32));
-        if (hash.toString('hex') !== storedHash)
+        const salt = 10;
+        const oldHashedPassword = await bcrypt.hash(oldPassword, salt);
+        const isValid = await bcrypt.compare(oldPassword, user.password);
+        if (!isValid) {
             throw new common_1.BadRequestException('Bad Request. Credentials are incorrect!');
-        const newHash = (await scrypt(newPassword, salt, 32));
-        if (newHash.toString('hex') === hash.toString('hex'))
+        }
+        const isEqual = await bcrypt.compare(newPassword, oldHashedPassword);
+        if (isEqual) {
             throw new common_1.BadRequestException('Old password is same as new password!');
-        const result = salt + '.' + newHash.toString('hex');
-        Object.assign(user, { password: result });
-        user.password = result;
+        }
+        const newHashedPassword = await bcrypt.hash(newPassword, salt);
+        user.password = newHashedPassword;
         return await user.save();
     }
 };

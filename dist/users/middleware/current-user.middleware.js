@@ -11,23 +11,28 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CurrentUserMiddleWare = void 0;
 const common_1 = require("@nestjs/common");
-const users_service_1 = require("../users.service");
+const jwt_1 = require("@nestjs/jwt");
 let CurrentUserMiddleWare = class CurrentUserMiddleWare {
-    constructor(usersService) {
-        this.usersService = usersService;
+    constructor(jwtService) {
+        this.jwtService = jwtService;
     }
-    async use(request, res, Next) {
-        const { userId } = request.session || {};
-        if (userId) {
-            const user = await this.usersService.findOne(userId);
-            request.currentUser = user;
+    async use(request, res, next) {
+        const { token } = request.session || {};
+        try {
+            const user = this.jwtService.verify(token);
+            if (user) {
+                request.currentUser = user;
+            }
         }
-        Next();
+        catch (err) {
+            request.currentUser = null;
+        }
+        next();
     }
 };
 CurrentUserMiddleWare = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [users_service_1.UsersService])
+    __metadata("design:paramtypes", [jwt_1.JwtService])
 ], CurrentUserMiddleWare);
 exports.CurrentUserMiddleWare = CurrentUserMiddleWare;
 //# sourceMappingURL=current-user.middleware.js.map

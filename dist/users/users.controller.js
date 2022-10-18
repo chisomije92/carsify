@@ -29,18 +29,17 @@ let UsersController = class UsersController {
         this.userService = userService;
         this.authService = authService;
     }
-    async createUser(body, session) {
+    async createUser(body) {
         const user = await this.authService.signUp(body.email, body.password);
-        session.userId = user._id;
         return user;
     }
     async signIn(body, session) {
-        const user = await this.authService.signIn(body.email, body.password);
-        console.log(user);
+        const { user, token } = await this.authService.signIn(body.email, body.password);
+        session.token = token;
         return user;
     }
     signOut(session) {
-        session.userId = null;
+        session.token = null;
     }
     whoAmI(user) {
         return user;
@@ -65,9 +64,8 @@ let UsersController = class UsersController {
 __decorate([
     (0, common_1.Post)('/signup'),
     __param(0, (0, common_1.Body)()),
-    __param(1, (0, common_1.Session)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_user_dto_1.CreateUserDto, Object]),
+    __metadata("design:paramtypes", [create_user_dto_1.CreateUserDto]),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "createUser", null);
 __decorate([

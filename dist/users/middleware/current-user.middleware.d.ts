@@ -1,12 +1,12 @@
 import { NestMiddleware } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 import { Request, Response, NextFunction } from 'express';
-import { UsersService } from '../users.service';
 interface RequestUser extends Request {
     currentUser: any;
 }
 export declare class CurrentUserMiddleWare implements NestMiddleware {
-    private usersService;
-    constructor(usersService: UsersService);
-    use(request: RequestUser, res: Response, Next: NextFunction): Promise<void>;
+    private jwtService;
+    constructor(jwtService: JwtService);
+    use(request: RequestUser, res: Response, next: NextFunction): Promise<void>;
 }
 export {};

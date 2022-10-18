@@ -31,29 +31,27 @@ export class UsersController {
   ) {}
 
   @Post('/signup')
-  async createUser(
-    @Body() body: CreateUserDto,
-    @Session() session: Record<'userId', string>,
-  ) {
+  async createUser(@Body() body: CreateUserDto) {
     const user = await this.authService.signUp(body.email, body.password);
-    session.userId = user._id;
     return user;
   }
 
   @Post('/signin')
   async signIn(
     @Body() body: CreateUserDto,
-    @Session() session: Record<'userId', string>,
+    @Session() session: Record<'token', string>,
   ) {
-    const user = await this.authService.signIn(body.email, body.password);
-    //session.userId = user._id;
-    console.log(user);
+    const { user, token } = await this.authService.signIn(
+      body.email,
+      body.password,
+    );
+    session.token = token;
     return user;
   }
 
   @Post('/signout')
-  signOut(@Session() session: any) {
-    session.userId = null;
+  signOut(@Session() session: Record<'token', string>) {
+    session.token = null;
   }
 
   @Get('/currentuser')

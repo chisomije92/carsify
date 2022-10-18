@@ -8,11 +8,13 @@ export declare class UsersController {
     private userService;
     private authService;
     constructor(userService: UsersService, authService: AuthService);
-    createUser(body: CreateUserDto, session: Record<'userId', string>): Promise<User & import("mongoose").Document<any, any, any> & {
+    createUser(body: CreateUserDto): Promise<User & import("mongoose").Document<any, any, any> & {
         _id: import("mongoose").Types.ObjectId;
     }>;
-    signIn(body: CreateUserDto, session: Record<'userId', string>): Promise<string>;
-    signOut(session: any): void;
+    signIn(body: CreateUserDto, session: Record<'token', string>): Promise<User & import("mongoose").Document<any, any, any> & {
+        _id: import("mongoose").Types.ObjectId;
+    }>;
+    signOut(session: Record<'token', string>): void;
     whoAmI(user: User): User;
     findUser(id: string): Promise<User & import("mongoose").Document<any, any, any> & {
         _id: import("mongoose").Types.ObjectId;
