@@ -5,7 +5,7 @@ import { User, UserSchema } from './user.schema';
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
 import { CurrentUserMiddleWare } from './middleware/current-user.middleware';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigModule } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import * as dotenv from 'dotenv';
 
