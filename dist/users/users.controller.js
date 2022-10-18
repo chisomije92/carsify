@@ -36,7 +36,7 @@ let UsersController = class UsersController {
     }
     async signIn(body, session) {
         const user = await this.authService.signIn(body.email, body.password);
-        session.userId = user._id;
+        console.log(user);
         return user;
     }
     signOut(session) {

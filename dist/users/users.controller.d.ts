@@ -11,9 +11,7 @@ export declare class UsersController {
     createUser(body: CreateUserDto, session: Record<'userId', string>): Promise<User & import("mongoose").Document<any, any, any> & {
         _id: import("mongoose").Types.ObjectId;
     }>;
-    signIn(body: CreateUserDto, session: Record<'userId', string>): Promise<User & import("mongoose").Document<any, any, any> & {
-        _id: import("mongoose").Types.ObjectId;
-    }>;
+    signIn(body: CreateUserDto, session: Record<'userId', string>): Promise<string>;
     signOut(session: any): void;
     whoAmI(user: User): User;
     findUser(id: string): Promise<User & import("mongoose").Document<any, any, any> & {

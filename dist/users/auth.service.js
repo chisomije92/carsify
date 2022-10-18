@@ -14,20 +14,22 @@ const common_1 = require("@nestjs/common");
 const users_service_1 = require("./users.service");
 const crypto_1 = require("crypto");
 const util_1 = require("util");
+const bcrypt = require("bcrypt");
+const jwt_1 = require("@nestjs/jwt");
 const scrypt = (0, util_1.promisify)(crypto_1.scrypt);
 let AuthService = class AuthService {
-    constructor(userService) {
+    constructor(userService, jwtService) {
         this.userService = userService;
+        this.jwtService = jwtService;
     }
     async signUp(email, password) {
         const users = await this.userService.find(email);
         if (users.length) {
             throw new common_1.BadRequestException('email in use');
         }
-        const salt = (0, crypto_1.randomBytes)(8).toString('hex');
-        const hash = (await scrypt(password, salt, 32));
-        const result = salt + '.' + hash.toString('hex');
-        const user = await this.userService.create(email, result);
+        const saltOrRounds = 10;
+        const hashedPassword = await bcrypt.hash(password, saltOrRounds);
+        const user = await this.userService.create(email, hashedPassword);
         return user;
     }
     async signIn(email, password) {
@@ -35,11 +37,14 @@ let AuthService = class AuthService {
         if (!user) {
             throw new common_1.NotFoundException('User Not Found!');
         }
-        const [salt, storedHash] = user.password.split('.');
-        const hash = (await scrypt(password, salt, 32));
-        if (hash.toString('hex') !== storedHash)
+        const result = await bcrypt.compare(password, user.password);
+        if (!result) {
             throw new common_1.BadRequestException('Bad Request. Credentials are incorrect!');
-        return user;
+        }
+        return this.jwtService.sign({
+            email: user.email,
+            id: user.id,
+        });
     }
     async changePassword(email, oldPassword, newPassword) {
         const [user] = await this.userService.find(email);
@@ -61,7 +66,8 @@ let AuthService = class AuthService {
 };
 AuthService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [users_service_1.UsersService])
+    __metadata("design:paramtypes", [users_service_1.UsersService,
+        jwt_1.JwtService])
 ], AuthService);
 exports.AuthService = AuthService;
 //# sourceMappingURL=auth.service.js.map

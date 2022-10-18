@@ -14,6 +14,8 @@ const user_schema_1 = require("./user.schema");
 const users_controller_1 = require("./users.controller");
 const users_service_1 = require("./users.service");
 const current_user_middleware_1 = require("./middleware/current-user.middleware");
+const config_1 = require("@nestjs/config");
+const jwt_1 = require("@nestjs/jwt");
 let UsersModule = class UsersModule {
     configure(consumer) {
         consumer.apply(current_user_middleware_1.CurrentUserMiddleWare).forRoutes('*');
@@ -23,6 +25,15 @@ UsersModule = __decorate([
     (0, common_1.Module)({
         imports: [
             mongoose_1.MongooseModule.forFeature([{ name: user_schema_1.User.name, schema: user_schema_1.UserSchema }]),
+            config_1.ConfigModule,
+            jwt_1.JwtModule.registerAsync({
+                imports: [config_1.ConfigModule],
+                useFactory: async (configService) => ({
+                    secret: configService.get('JWT_SECRET'),
+                    signOptions: { expiresIn: '60s' },
+                }),
+                inject: [config_1.ConfigService],
+            }),
         ],
         controllers: [users_controller_1.UsersController],
         providers: [users_service_1.UsersService, auth_service_1.AuthService],
