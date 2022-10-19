@@ -11,8 +11,8 @@ export declare class AuthController {
     createUser(body: CreateUserDto): Promise<User & import("mongoose").Document<any, any, any> & {
         _id: import("mongoose").Types.ObjectId;
     }>;
-    signIn(body: CreateUserDto, session: Record<'token', string>): Promise<User & import("mongoose").Document<any, any, any> & {
-        _id: import("mongoose").Types.ObjectId;
+    signIn(body: CreateUserDto, session: Record<'token', string>): Promise<{
+        accessToken: string;
     }>;
     signOut(session: Record<'token', string>): void;
     whoAmI(user: User): User;

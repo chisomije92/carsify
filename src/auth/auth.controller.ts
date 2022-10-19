@@ -41,12 +41,11 @@ export class AuthController {
     @Body() body: CreateUserDto,
     @Session() session: Record<'token', string>,
   ) {
-    const { user, token } = await this.authService.signIn(
-      body.email,
-      body.password,
-    );
+    const token = await this.authService.signIn(body.email, body.password);
     session.token = token;
-    return user;
+    return {
+      accessToken: token,
+    };
   }
 
   @Post('/signout')

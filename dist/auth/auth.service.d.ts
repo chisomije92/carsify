@@ -7,12 +7,7 @@ export declare class AuthService {
     signUp(email: string, password: string): Promise<import("../users/user.schema").User & import("mongoose").Document<any, any, any> & {
         _id: import("mongoose").Types.ObjectId;
     }>;
-    signIn(email: string, password: string): Promise<{
-        token: string;
-        user: import("../users/user.schema").User & import("mongoose").Document<any, any, any> & {
-            _id: import("mongoose").Types.ObjectId;
-        };
-    }>;
+    signIn(email: string, password: string): Promise<string>;
     changePassword(email: string, oldPassword: string, newPassword: string): Promise<import("../users/user.schema").User & import("mongoose").Document<any, any, any> & {
         _id: import("mongoose").Types.ObjectId;
     }>;

@@ -17,7 +17,12 @@ let CurrentUserMiddleWare = class CurrentUserMiddleWare {
         this.jwtService = jwtService;
     }
     async use(request, res, next) {
-        const { token } = request.session || {};
+        const authToken = request.get('authorization');
+        if (!authToken) {
+            next();
+            return;
+        }
+        const token = authToken.split(' ')[1];
         try {
             const user = this.jwtService.verify(token);
             if (user) {

@@ -34,19 +34,15 @@ export class AuthService {
     if (!result) {
       throw new BadRequestException('Bad Request. Credentials are incorrect!');
     }
-    const auth = {
-      token: this.jwtService.sign(
-        {
-          email: user.email,
-          id: user.id,
-        },
-        {
-          expiresIn: '60m',
-        },
-      ),
-      user: user,
-    };
-    return auth;
+    return this.jwtService.sign(
+      {
+        email: user.email,
+        id: user.id,
+      },
+      {
+        expiresIn: '60m',
+      },
+    );
   }
 
   async changePassword(

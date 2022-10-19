@@ -1,6 +1,10 @@
 /* eslint-disable prettier/prettier */
 
-import { Injectable, NestMiddleware } from '@nestjs/common';
+import {
+  Injectable,
+  NestMiddleware,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Request, Response, NextFunction } from 'express';
 
@@ -12,7 +16,12 @@ export class CurrentUserMiddleWare implements NestMiddleware {
   constructor(private jwtService: JwtService) {}
 
   async use(request: RequestUser, res: Response, next: NextFunction) {
-    const { token } = request.session || {};
+    const authToken = request.get('authorization');
+    if (!authToken) {
+      next();
+      return;
+    }
+    const token = authToken.split(' ')[1];
     try {
       const user = this.jwtService.verify(token);
       if (user) {
