@@ -10,6 +10,7 @@ interface RequestUser extends Request {
 @Injectable()
 export class CurrentUserMiddleWare implements NestMiddleware {
   constructor(private jwtService: JwtService) {}
+
   async use(request: RequestUser, res: Response, next: NextFunction) {
     const { token } = request.session || {};
     try {

@@ -4,9 +4,10 @@ import {
   BadRequestException,
   NotFoundException,
 } from '@nestjs/common';
-import { UsersService } from './users.service';
+
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
+import { UsersService } from '../users/users.service';
 @Injectable()
 export class AuthService {
   constructor(

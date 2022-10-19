@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { ReportsModule } from './reports/reports.module';
 import { APP_PIPE } from '@nestjs/core';
+import { AuthModule } from './auth/auth.module';
 import cookieSession = require('cookie-session');
 
 @Module({
@@ -26,6 +27,7 @@ import cookieSession = require('cookie-session');
     }),
     UsersModule,
     ReportsModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [

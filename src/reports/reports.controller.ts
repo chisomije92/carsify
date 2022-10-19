@@ -8,7 +8,7 @@ import {
   Param,
   UseGuards,
 } from '@nestjs/common';
-import { CurrentUser } from '../users/decorators/current-user.decorator';
+import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import { AuthGuard } from '../guards/auth.guard';
 import { CreateReportDto } from './dtos/create-report.dto';
 import { ReportsService } from './reports.service';

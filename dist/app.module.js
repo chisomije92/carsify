@@ -18,6 +18,7 @@ const app_service_1 = require("./app.service");
 const users_module_1 = require("./users/users.module");
 const reports_module_1 = require("./reports/reports.module");
 const core_1 = require("@nestjs/core");
+const auth_module_1 = require("./auth/auth.module");
 const cookieSession = require("cookie-session");
 let AppModule = class AppModule {
     constructor(configService) {
@@ -49,6 +50,7 @@ AppModule = __decorate([
             }),
             users_module_1.UsersModule,
             reports_module_1.ReportsModule,
+            auth_module_1.AuthModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [

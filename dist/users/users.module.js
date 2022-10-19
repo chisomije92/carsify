@@ -9,31 +9,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersModule = void 0;
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
-const auth_service_1 = require("./auth.service");
 const user_schema_1 = require("./user.schema");
-const users_controller_1 = require("./users.controller");
 const users_service_1 = require("./users.service");
-const current_user_middleware_1 = require("./middleware/current-user.middleware");
 const config_1 = require("@nestjs/config");
-const jwt_1 = require("@nestjs/jwt");
 const dotenv = require("dotenv");
 dotenv.config();
 let UsersModule = class UsersModule {
-    configure(consumer) {
-        consumer.apply(current_user_middleware_1.CurrentUserMiddleWare).forRoutes('*');
-    }
 };
 UsersModule = __decorate([
     (0, common_1.Module)({
         imports: [
             mongoose_1.MongooseModule.forFeature([{ name: user_schema_1.User.name, schema: user_schema_1.UserSchema }]),
             config_1.ConfigModule,
-            jwt_1.JwtModule.register({
-                secret: process.env.JWT_SECRET,
-            }),
         ],
-        controllers: [users_controller_1.UsersController],
-        providers: [users_service_1.UsersService, auth_service_1.AuthService],
+        providers: [users_service_1.UsersService],
+        exports: [users_service_1.UsersService],
     })
 ], UsersModule);
 exports.UsersModule = UsersModule;
