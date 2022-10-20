@@ -1,8 +1,10 @@
 import { Model, Types } from 'mongoose';
 import { User, UserDocument } from './user.schema';
+import { ReportsService } from '../reports/reports.service';
 export declare class UsersService {
     private userRepo;
-    constructor(userRepo: Model<UserDocument>);
+    private reportService;
+    constructor(userRepo: Model<UserDocument>, reportService: ReportsService);
     create(email: string, password: string): Promise<User & import("mongoose").Document<any, any, any> & {
         _id: Types.ObjectId;
     }>;
@@ -15,7 +17,5 @@ export declare class UsersService {
     update(id: string, attrs: Partial<User>): Promise<User & import("mongoose").Document<any, any, any> & {
         _id: Types.ObjectId;
     }>;
-    remove(id: string): Promise<User & import("mongoose").Document<any, any, any> & {
-        _id: Types.ObjectId;
-    }>;
+    remove(id: string): Promise<any>;
 }

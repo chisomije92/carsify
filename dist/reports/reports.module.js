@@ -21,6 +21,7 @@ ReportsModule = __decorate([
         ],
         controllers: [reports_controller_1.ReportsController],
         providers: [reports_service_1.ReportsService],
+        exports: [reports_service_1.ReportsService],
     })
 ], ReportsModule);
 exports.ReportsModule = ReportsModule;

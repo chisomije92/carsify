@@ -4,6 +4,7 @@ import { User, UserSchema } from './user.schema';
 import { UsersService } from './users.service';
 import { ConfigModule } from '@nestjs/config';
 import * as dotenv from 'dotenv';
+import { ReportsModule } from 'src/reports/reports.module';
 
 dotenv.config();
 
@@ -11,6 +12,7 @@ dotenv.config();
   imports: [
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
     ConfigModule,
+    ReportsModule,
   ],
   providers: [UsersService],
   exports: [UsersService],

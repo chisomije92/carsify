@@ -41,4 +41,11 @@ export class ReportsService {
       .sort('-mileage')
       .limit(3);
   }
+
+  async removeReports(userId: string) {
+    const deletedDocuments = await this.reportModel.deleteMany({
+      user: userId,
+    });
+    return deletedDocuments.acknowledged;
+  }
 }

@@ -22,9 +22,7 @@ export declare class AuthController {
     findAllUsers(email: string): Promise<(User & import("mongoose").Document<any, any, any> & {
         _id: import("mongoose").Types.ObjectId;
     })[]>;
-    removeUser(id: string): Promise<User & import("mongoose").Document<any, any, any> & {
-        _id: import("mongoose").Types.ObjectId;
-    }>;
+    removeUser(id: string): Promise<any>;
     updateUser(id: string, body: UpdateUserDto): Promise<User & import("mongoose").Document<any, any, any> & {
         _id: import("mongoose").Types.ObjectId;
     }>;

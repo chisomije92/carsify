@@ -15,4 +15,5 @@ export declare class ReportsService {
     createEstimate({ make, lng, lat }: GetEstimateDto): Promise<(Report & import("mongoose").Document<any, any, any> & {
         _id: import("mongoose").Types.ObjectId;
     })[]>;
+    removeReports(userId: string): Promise<boolean>;
 }

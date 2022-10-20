@@ -7,10 +7,14 @@ import {
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
 import { User, UserDocument } from './user.schema';
+import { ReportsService } from '../reports/reports.service';
 
 @Injectable()
 export class UsersService {
-  constructor(@InjectModel(User.name) private userRepo: Model<UserDocument>) {}
+  constructor(
+    @InjectModel(User.name) private userRepo: Model<UserDocument>,
+    private reportService: ReportsService,
+  ) {}
   async create(email: string, password: string) {
     return await this.userRepo.create({ email, password });
   }
@@ -27,18 +31,24 @@ export class UsersService {
   async update(id: string, attrs: Partial<User>) {
     const user = await this.userRepo.findOne({ _id: new Types.ObjectId(id) });
     if (!user) {
-      throw new NotFoundException('User not found');
+      throw new NotFoundException(
+        'You are not a registered user. Please proceed to sign up as a user!',
+      );
     }
-    if (attrs.password) throw new BadRequestException('Invalid request!');
+    if (attrs.password)
+      throw new BadRequestException(
+        'You cannot update password. Please proceed to change password for this!',
+      );
     Object.assign(user, attrs);
     return await user.save();
   }
 
   async remove(id: string) {
-    const user = await this.userRepo.findByIdAndDelete(id);
+    const user = await this.userRepo.findById(id);
     if (!user) {
-      throw new NotFoundException('User not found');
+      throw new NotFoundException('This is not a registered user!');
     }
-    return user;
+    await this.reportService.removeReports(id);
+    return user.delete();
   }
 }

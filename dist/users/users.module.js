@@ -13,6 +13,7 @@ const user_schema_1 = require("./user.schema");
 const users_service_1 = require("./users.service");
 const config_1 = require("@nestjs/config");
 const dotenv = require("dotenv");
+const reports_module_1 = require("../reports/reports.module");
 dotenv.config();
 let UsersModule = class UsersModule {
 };
@@ -21,6 +22,7 @@ UsersModule = __decorate([
         imports: [
             mongoose_1.MongooseModule.forFeature([{ name: user_schema_1.User.name, schema: user_schema_1.UserSchema }]),
             config_1.ConfigModule,
+            reports_module_1.ReportsModule,
         ],
         providers: [users_service_1.UsersService],
         exports: [users_service_1.UsersService],
