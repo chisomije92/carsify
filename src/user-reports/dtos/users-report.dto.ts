@@ -4,6 +4,9 @@ import { Expose, Transform } from 'class-transformer';
 
 export class UserReportDto {
   @Expose()
+  id: number;
+
+  @Expose()
   make: string;
 
   @Expose()

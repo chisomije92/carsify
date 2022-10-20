@@ -15,6 +15,10 @@ class UserReportDto {
 }
 __decorate([
     (0, class_transformer_1.Expose)(),
+    __metadata("design:type", Number)
+], UserReportDto.prototype, "id", void 0);
+__decorate([
+    (0, class_transformer_1.Expose)(),
     __metadata("design:type", String)
 ], UserReportDto.prototype, "make", void 0);
 __decorate([
