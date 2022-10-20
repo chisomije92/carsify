@@ -2,11 +2,11 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { User } from '../users/user.schema';
 import { CreateReportDto } from './dtos/create-report.dto';
 import { Report, ReportDocument } from './report.schema';
 import { NotFoundException } from '@nestjs/common';
 import { GetEstimateDto } from './dtos/get-estimate.dto';
+import { User } from '../users/user.schema';
 
 @Injectable()
 export class ReportsService {
@@ -47,5 +47,9 @@ export class ReportsService {
       user: userId,
     });
     return deletedDocuments.acknowledged;
+  }
+
+  async findRelatedReports(userId: string) {
+    return await this.reportModel.find({ user: userId });
   }
 }

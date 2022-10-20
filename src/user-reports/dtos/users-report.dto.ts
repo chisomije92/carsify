@@ -1,0 +1,30 @@
+/* eslint-disable prettier/prettier */
+
+import { Expose, Transform } from 'class-transformer';
+
+export class UserReportDto {
+  @Expose()
+  make: string;
+
+  @Expose()
+  model: string;
+
+  @Expose()
+  year: number;
+
+  @Expose()
+  mileage: number;
+
+  @Expose()
+  lng: number;
+
+  @Expose()
+  lat: number;
+
+  @Expose()
+  price: number;
+
+  @Expose()
+  @Transform(({ value }) => value._id)
+  user: string;
+}

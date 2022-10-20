@@ -3,11 +3,12 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UsersModule } from './users/users.module';
 import { ReportsModule } from './reports/reports.module';
 import { APP_PIPE } from '@nestjs/core';
 import { AuthModule } from './auth/auth.module';
 import cookieSession = require('cookie-session');
+import { UsersModule } from './users/users.module';
+import { UserReportsModule } from './user-reports/user-reports-module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import cookieSession = require('cookie-session');
     UsersModule,
     ReportsModule,
     AuthModule,
+    UserReportsModule,
   ],
   controllers: [AppController],
   providers: [

@@ -1,6 +1,6 @@
 import { Model, Types } from 'mongoose';
-import { User, UserDocument } from './user.schema';
 import { ReportsService } from '../reports/reports.service';
+import { User, UserDocument } from './user.schema';
 export declare class UsersService {
     private userRepo;
     private reportService;

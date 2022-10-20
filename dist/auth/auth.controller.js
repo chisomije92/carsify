@@ -86,7 +86,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], AuthController.prototype, "signOut", null);
 __decorate([
-    (0, common_1.Get)('/currentuser'),
+    (0, common_1.Get)('/current-user'),
     (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
     __param(0, (0, current_user_decorator_1.CurrentUser)()),
     __metadata("design:type", Function),

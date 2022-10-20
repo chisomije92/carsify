@@ -54,6 +54,9 @@ let ReportsService = class ReportsService {
         });
         return deletedDocuments.acknowledged;
     }
+    async findRelatedReports(userId) {
+        return await this.reportModel.find({ user: userId });
+    }
 };
 ReportsService = __decorate([
     (0, common_1.Injectable)(),

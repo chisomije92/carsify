@@ -14,8 +14,6 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersController = void 0;
 const common_1 = require("@nestjs/common");
-const auth_service_1 = require("./auth.service");
-const current_user_decorator_1 = require("./decorators/current-user.decorator");
 const create_user_dto_1 = require("./dtos/create-user.dto");
 const update_user_dto_1 = require("./dtos/update-user.dto");
 const user_dto_1 = require("./dtos/user-dto");
@@ -24,6 +22,8 @@ const users_service_1 = require("./users.service");
 const user_schema_1 = require("./user.schema");
 const auth_guard_1 = require("../guards/auth.guard");
 const update_user_password_dtos_1 = require("./dtos/update-user-password.dtos");
+const auth_service_1 = require("../auth/auth.service");
+const current_user_decorator_1 = require("../auth/decorators/current-user.decorator");
 let UsersController = class UsersController {
     constructor(userService, authService) {
         this.userService = userService;
@@ -84,7 +84,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], UsersController.prototype, "signOut", null);
 __decorate([
-    (0, common_1.Get)('/currentuser'),
+    (0, common_1.Get)('/current-user'),
     (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
     __param(0, (0, current_user_decorator_1.CurrentUser)()),
     __metadata("design:type", Function),

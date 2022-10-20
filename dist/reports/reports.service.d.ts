@@ -1,8 +1,8 @@
 import { Model } from 'mongoose';
-import { User } from '../users/user.schema';
 import { CreateReportDto } from './dtos/create-report.dto';
 import { Report, ReportDocument } from './report.schema';
 import { GetEstimateDto } from './dtos/get-estimate.dto';
+import { User } from '../users/user.schema';
 export declare class ReportsService {
     private reportModel;
     constructor(reportModel: Model<ReportDocument>);
@@ -16,4 +16,7 @@ export declare class ReportsService {
         _id: import("mongoose").Types.ObjectId;
     })[]>;
     removeReports(userId: string): Promise<boolean>;
+    findRelatedReports(userId: string): Promise<(Report & import("mongoose").Document<any, any, any> & {
+        _id: import("mongoose").Types.ObjectId;
+    })[]>;
 }
