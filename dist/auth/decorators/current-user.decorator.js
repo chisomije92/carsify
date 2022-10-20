@@ -5,8 +5,9 @@ const common_1 = require("@nestjs/common");
 exports.CurrentUser = (0, common_1.createParamDecorator)((data, context) => {
     const request = context.switchToHttp().getRequest();
     const { currentUser } = request;
-    if (!currentUser)
+    if (!currentUser) {
         throw new common_1.UnauthorizedException('Not authorized. Please log in');
+    }
     return currentUser;
 });
 //# sourceMappingURL=current-user.decorator.js.map

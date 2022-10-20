@@ -9,8 +9,10 @@ export const CurrentUser = createParamDecorator(
   (data: never, context: ExecutionContext) => {
     const request = context.switchToHttp().getRequest();
     const { currentUser } = request;
-    if (!currentUser)
+    if (!currentUser) {
       throw new UnauthorizedException('Not authorized. Please log in');
+    }
+
     return currentUser;
   },
 );

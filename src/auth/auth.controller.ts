@@ -39,18 +39,21 @@ export class AuthController {
   @Post('/signin')
   async signIn(
     @Body() body: CreateUserDto,
-    @Session() session: Record<'token', string>,
+    @Session() session: Record<'userId', string>,
   ) {
-    const token = await this.authService.signIn(body.email, body.password);
-    session.token = token;
+    const { user, token } = await this.authService.signIn(
+      body.email,
+      body.password,
+    );
+    session.userId = user.id;
     return {
       accessToken: token,
     };
   }
 
   @Post('/signout')
-  signOut(@Session() session: Record<'token', string>) {
-    session.token = null;
+  signOut(@Session() session: Record<'userId', string>) {
+    session.userId = null;
   }
 
   @Get('/currentuser')

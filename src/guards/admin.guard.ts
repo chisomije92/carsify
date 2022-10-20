@@ -7,7 +7,11 @@ export class AdminGuard implements CanActivate {
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
     const request = context.switchToHttp().getRequest();
-    if (!request.currentUser) return false;
+    console.log(request.currentUser);
+    if (!request.currentUser) {
+      console.log('failed');
+      return false;
+    }
     return request.currentUser.admin;
   }
 }

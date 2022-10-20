@@ -11,10 +11,10 @@ export declare class AuthController {
     createUser(body: CreateUserDto): Promise<User & import("mongoose").Document<any, any, any> & {
         _id: import("mongoose").Types.ObjectId;
     }>;
-    signIn(body: CreateUserDto, session: Record<'token', string>): Promise<{
+    signIn(body: CreateUserDto, session: Record<'userId', string>): Promise<{
         accessToken: string;
     }>;
-    signOut(session: Record<'token', string>): void;
+    signOut(session: Record<'userId', string>): void;
     whoAmI(user: User): User;
     findUser(id: string): Promise<User & import("mongoose").Document<any, any, any> & {
         _id: import("mongoose").Types.ObjectId;

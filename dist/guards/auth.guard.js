@@ -4,7 +4,7 @@ exports.AuthGuard = void 0;
 class AuthGuard {
     canActivate(context) {
         const request = context.switchToHttp().getRequest();
-        return request.session.token;
+        return request.session.userId;
     }
 }
 exports.AuthGuard = AuthGuard;

@@ -34,14 +34,14 @@ let AuthController = class AuthController {
         return user;
     }
     async signIn(body, session) {
-        const token = await this.authService.signIn(body.email, body.password);
-        session.token = token;
+        const { user, token } = await this.authService.signIn(body.email, body.password);
+        session.userId = user.id;
         return {
             accessToken: token,
         };
     }
     signOut(session) {
-        session.token = null;
+        session.userId = null;
     }
     whoAmI(user) {
         return user;
