@@ -1,9 +1,8 @@
 
+
 # Carsify
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 [![Nest JS](https://img.shields.io/badge/Nestjs-Rest%20API-red)](https://nestjs.com/)
-
-
 A Rest API that enables registered users to view and create reports for cars at their convenience.
 
 
@@ -36,6 +35,7 @@ A Rest API that enables registered users to view and create reports for cars at 
 
 ```http
   POST https://carsify-api.vercel.app/auth/signin
+  
 ```
 
 | Parameter | Type     | Description                | Required                |
@@ -43,11 +43,15 @@ A Rest API that enables registered users to view and create reports for cars at 
 | `email` | `string` |  Email address of user       | Yes              |
 | `password` | `string` |  Password of user       | Yes
 
+
 #### Get current user
 
 ```http
   GET https://carsify-api.vercel.app/auth/current-user
 ```
+`Authorization: bearer ${token}`
+
+
 
 #### User Sign out
 
@@ -89,7 +93,7 @@ A Rest API that enables registered users to view and create reports for cars at 
 | :-------- | :------- | :------------------------- | :------------------------- |
 | `email` | `string` |  Email address of user       | Yes              |
 | `oldPassword` | `string` |  Current password of user       | Yes
-| `newPassword` | `string` |  New password of user       | Yes
+| `password` | `string` |  New password of user       | Yes
 
 
 ## API Reference - Reports
@@ -99,6 +103,9 @@ A Rest API that enables registered users to view and create reports for cars at 
 ```http
   POST https://carsify-api.vercel.app/reports
 ```
+`content-type: application/json`
+
+`Authorization: bearer ${token}`
 
 | Parameter | Type     | Description                | Required                |
 | :-------- | :------- | :------------------------- | :------------------------- |
@@ -117,11 +124,14 @@ A Rest API that enables registered users to view and create reports for cars at 
 ```http
   POST https://carsify-api.vercel.app/reports/:id
 ```
+`content-type: application/json`
+
+`Authorization: bearer ${token}`
+
 
 | Parameter | Type     | Description                | Required                |
 | :-------- | :------- | :------------------------- | :------------------------- |
 | `approved` | `string` |  approval status      | Yes              |
-
 
 
 #### Get estimate for existing vehicle
@@ -129,12 +139,9 @@ A Rest API that enables registered users to view and create reports for cars at 
 ```http
   GET https://carsify-api.vercel.app/auth/?make=${make}&model=${model}&lng=${lng}&lat=${lat}&mileage=${mileage}&year=${year}
 ```
-## Authors
-
-- [@devManiac92](https://www.twitter.com/devManiac92)
-
-
 ## Feedback
 
 If you have any feedback, please reach out to me at chisomije92@gmail.com
+
+
 
