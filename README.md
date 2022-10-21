@@ -46,7 +46,7 @@ A Rest API that enables registered users to view and create reports for cars at 
 #### Get current user
 
 ```http
-  GET https://carsify-api.vercel.app/auth/currentuser
+  GET https://carsify-api.vercel.app/auth/current-user
 ```
 
 #### User Sign out
