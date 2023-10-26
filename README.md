@@ -5,7 +5,7 @@
 [![Nest JS](https://img.shields.io/badge/Nestjs-Rest%20API-red)](https://nestjs.com/)
 
 
-A Rest API that enables registered users to view and create reports for cars at their convenience.
+A REST API that enables registered users to view and create reports for cars at their convenience.
 
 
 ## Features
